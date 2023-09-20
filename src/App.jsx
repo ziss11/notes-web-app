@@ -1,13 +1,14 @@
 import React from "react";
 import { NoteHeader } from "./components/NoteHeader";
 import { NoteInput } from "./components/NoteInput";
+import { getInitialData } from "./utils";
 
 export class App extends React.Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            notes: []
+            notes: getInitialData()
         }
 
         this.onSearch = this.onSearch.bind(this)
