@@ -11,6 +11,7 @@ export class App extends React.Component {
         }
 
         this.onSearch = this.onSearch.bind(this)
+        this.onNoteCreated = this.onNoteCreated.bind(this)
     }
 
     onSearch(query) {
@@ -20,12 +21,29 @@ export class App extends React.Component {
         this.setState({ notes })
     }
 
+    onNoteCreated({ title, body }) {
+        this.setState((prevState) => {
+            return {
+                notes: [
+                    ...prevState.notes,
+                    {
+                        id: +new Date(),
+                        title,
+                        body,
+                        archived: false,
+                        craatedAt: new Date().toISOString(),
+                    }
+                ]
+            }
+        })
+    }
+
     render() {
         return (
             <>
                 <NoteHeader onSearch={this.onSearch} />
                 <div className="note-app__body">
-                    <NoteInput />
+                    <NoteInput onNoteCreated={this.onNoteCreated} />
                 </div>
             </>
         );

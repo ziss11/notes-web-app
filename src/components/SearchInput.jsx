@@ -8,11 +8,11 @@ export class SearchInput extends React.Component {
       query: '',
     }
 
-    this.onQueryChanged = this.onQueryChanged.bind(this)
+    this.onQueryChange = this.onQueryChange.bind(this)
     this.onSearchSubmitted = this.onSearchSubmitted.bind(this)
   }
 
-  onQueryChanged(event) {
+  onQueryChange(event) {
     this.setState(() => {
       return {
         query: event.target.value
@@ -32,10 +32,8 @@ export class SearchInput extends React.Component {
           type="search"
           className="note-search"
           placeholder='Cari catatan...'
-          id='search'
-          name='search'
           value={this.state.query}
-          onChange={this.onQueryChanged}
+          onChange={this.onQueryChange}
         />
       </form>
     )
