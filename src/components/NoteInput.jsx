@@ -6,7 +6,8 @@ export class NoteInput extends React.Component {
 
         this.state = {
             title: '',
-            body: ''
+            body: '',
+            remainingChars: 50,
         }
 
         this.onTitleChange = this.onTitleChange.bind(this)
@@ -15,11 +16,17 @@ export class NoteInput extends React.Component {
     }
 
     onTitleChange(event) {
-        this.setState(() => {
-            return {
-                title: event.target.value
-            }
-        })
+        const limitChar = 50
+
+        const newTitle = event.target.value;
+        const newRemainingChars = this.state.remainingChars - (newTitle.length - this.state.title.length);
+
+        if (newTitle.length <= limitChar) {
+            this.setState({
+                title: newTitle,
+                remainingChars: newRemainingChars
+            })
+        }
     }
 
     onBodyChange(event) {
@@ -45,7 +52,7 @@ export class NoteInput extends React.Component {
         return (
             <div className="note-input">
                 <h2 className="note-input__title">Buat Catatan</h2>
-                <p className="note-input__title__char-limit">Sisa karakter: </p>
+                <p className="note-input__title__char-limit">Sisa karakter: {this.state.remainingChars}</p>
 
                 <form onSubmit={this.onNoteCreated}>
                     <input

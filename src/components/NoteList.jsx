@@ -4,7 +4,6 @@ import { NoteItem } from "./NoteItem"
 export const NoteList = ({ notes, onDelete, onArchive, isArchivedList = false }) => {
     const result = notes
         .filter((note) => note.archived === isArchivedList)
-    console.log(result)
     return (result.length !== 0)
         ? <div className="notes-list" >
             {
