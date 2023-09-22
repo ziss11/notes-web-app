@@ -1,3 +1,4 @@
+import autoBind from "auto-bind";
 import React from "react";
 import { NoteHeader } from "./components/NoteHeader";
 import { NoteInput } from "./components/NoteInput";
@@ -12,10 +13,7 @@ export class App extends React.Component {
             notes: getInitialData(),
         }
 
-        this.onSearch = this.onSearch.bind(this)
-        this.onNoteCreated = this.onNoteCreated.bind(this)
-        this.onNoteDeleted = this.onNoteDeleted.bind(this)
-        this.onNoteArchived = this.onNoteArchived.bind(this)
+        autoBind(this)
     }
 
     onSearch(query) {

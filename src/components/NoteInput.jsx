@@ -1,3 +1,4 @@
+import autoBind from "auto-bind";
 import React from "react";
 
 export class NoteInput extends React.Component {
@@ -10,9 +11,7 @@ export class NoteInput extends React.Component {
             remainingChars: 50,
         }
 
-        this.onTitleChange = this.onTitleChange.bind(this)
-        this.onBodyChange = this.onBodyChange.bind(this)
-        this.onNoteCreated = this.onNoteCreated.bind(this)
+        autoBind(this)
     }
 
     onTitleChange(event) {
@@ -38,6 +37,11 @@ export class NoteInput extends React.Component {
     }
 
     onNoteCreated(event) {
+        if (this.state.title.length === 0 && this.state.body.length === 0) {
+            alert("Title dan Body note tidak boleh kosong")
+            return
+        }
+
         event.preventDefault()
         this.props.onNoteCreated(this.state)
         this.setState(() => {

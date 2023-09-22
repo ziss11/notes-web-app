@@ -1,4 +1,5 @@
-import React from 'react'
+import autoBind from "auto-bind";
+import React from 'react';
 
 export class SearchInput extends React.Component {
   constructor(props) {
@@ -8,7 +9,7 @@ export class SearchInput extends React.Component {
       query: '',
     }
 
-    this.onQueryChange = this.onQueryChange.bind(this)
+    autoBind(this)
   }
 
   onQueryChange(event) {
