@@ -19,10 +19,14 @@ export class App extends React.Component {
     }
 
     onSearch(query) {
-        const notes = this.state.notes.filter(
-            (note) => note.title.toLowerCase().includes(query)
-        )
-        this.setState({ notes })
+        if (query.length !== 0) {
+            const notes = this.state.notes.filter(
+                (note) => note.title.toLowerCase().includes(query)
+            )
+            this.setState({ notes })
+        } else {
+            this.setState({ notes: getInitialData() })
+        }
     }
 
     onNoteCreated({ title, body }) {
@@ -58,6 +62,8 @@ export class App extends React.Component {
     }
 
     render() {
+        const activeNotes = this.state.notes.filter((note) => note.archived === false)
+        const archiveNotes = this.state.notes.filter((note) => note.archived === true)
         return (
             <>
                 <NoteHeader onSearch={this.onSearch} />
@@ -66,15 +72,14 @@ export class App extends React.Component {
 
                     <h2>Catatan Aktif</h2>
                     <NoteList
-                        notes={this.state.notes}
+                        notes={activeNotes}
                         onDelete={this.onNoteDeleted}
                         onArchive={this.onNoteArchived}
                     />
 
                     <h2>Arsip</h2>
                     <NoteList
-                        notes={this.state.notes}
-                        isArchivedList={true}
+                        notes={archiveNotes}
                         onDelete={this.onNoteDeleted}
                         onArchive={this.onNoteArchived}
                     />

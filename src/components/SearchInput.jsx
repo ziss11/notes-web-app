@@ -9,33 +9,30 @@ export class SearchInput extends React.Component {
     }
 
     this.onQueryChange = this.onQueryChange.bind(this)
-    this.onSearchSubmitted = this.onSearchSubmitted.bind(this)
   }
 
   onQueryChange(event) {
+    event.preventDefault()
+
+    const newQuery = event.target.value
+    this.props.onSearch(newQuery)
+
     this.setState(() => {
       return {
-        query: event.target.value
+        query: newQuery
       }
     })
   }
 
-  onSearchSubmitted(event) {
-    event.preventDefault()
-    this.props.onSearch(this.state.query)
-  }
-
   render() {
     return (
-      <form onSubmit={this.onSearchSubmitted}>
-        <input
-          type="search"
-          className="note-search"
-          placeholder='Cari catatan...'
-          value={this.state.query}
-          onChange={this.onQueryChange}
-        />
-      </form>
+      <input
+        type="search"
+        className="note-search"
+        placeholder='Cari catatan...'
+        value={this.state.query}
+        onChange={this.onQueryChange}
+      />
     )
   }
 }
