@@ -33,6 +33,12 @@ export class NoteInput extends React.Component {
     onNoteCreated(event) {
         event.preventDefault()
         this.props.onNoteCreated(this.state)
+        this.setState(() => {
+            return {
+                title: '',
+                body: ''
+            }
+        })
     }
 
     render() {
