@@ -1,39 +1,39 @@
-import autoBind from "auto-bind";
+import autoBind from 'auto-bind';
 import React from 'react';
 
 export class SearchInput extends React.Component {
-  constructor(props) {
-    super(props)
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      query: '',
+        this.state = {
+            query: '',
+        };
+
+        autoBind(this);
     }
 
-    autoBind(this)
-  }
+    onQueryChange(event) {
+        event.preventDefault();
 
-  onQueryChange(event) {
-    event.preventDefault()
+        const newQuery = event.target.value;
+        this.props.onSearch(newQuery);
 
-    const newQuery = event.target.value
-    this.props.onSearch(newQuery)
+        this.setState(() => {
+            return {
+                query: newQuery,
+            };
+        });
+    }
 
-    this.setState(() => {
-      return {
-        query: newQuery
-      }
-    })
-  }
-
-  render() {
-    return (
-      <input
-        type="search"
-        className="note-search"
-        placeholder='Cari catatan...'
-        value={this.state.query}
-        onChange={this.onQueryChange}
-      />
-    )
-  }
+    render() {
+        return (
+            <input
+                type='search'
+                className='note-search'
+                placeholder='Cari catatan...'
+                value={this.state.query}
+                onChange={this.onQueryChange}
+            />
+        );
+    }
 }
